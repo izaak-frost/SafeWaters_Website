@@ -8,7 +8,11 @@ React + TypeScript + Vite public website for safewaters.uk.
 - `npm run preview` serves the production build locally.
 
 Routes: `/`, `/email-confirmed`, and a fallback page for unknown URLs.
-Deploy `dist` with SPA fallback enabled. `public/_redirects` supplies that rule for Cloudflare Pages / Netlify. Other hosts must route unknown paths to `index.html` so direct email-confirmation links work.
+Cloudflare Pages: use `npm run build` as the build command and `dist` as the output directory. Pages supplies SPA fallback automatically when there is no top-level `404.html`.
+
+Cloudflare Workers Static Assets: use `npm run build`, then `npx wrangler deploy --config wrangler.jsonc`. The checked-in configuration enables `assets.not_found_handling: "single-page-application"` so direct links such as `/email-confirmed` load the React app.
+
+Do not add the catch-all `/* /index.html 200` to `_redirects`: Workers rejects it as an infinite loop. Rebuild before deploying so old copies of `_redirects` are removed from `dist`. If Cloudflare reports a redirected configuration at `dist/wrangler.json`, update the source configuration or deployment integration that generates it with the same SPA setting; do not edit generated output. Other hosts must provide an equivalent fallback to `index.html`.
 
 The shared logo and favicon use `public/logo.png`, served at `/logo.png`.
 `src/vite-env.d.ts` supplies Vite's asset and CSS import types for `main.tsx`.
