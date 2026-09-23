@@ -10,7 +10,7 @@ function Layout({ children }: { children: ReactNode }) {
     <a className="skip-link" href="#main">Skip to content</a>
     <header className="site-header"><div className="container nav"><Brand /></div></header>
     <main id="main">{children}</main>
-    <footer className="site-footer"><div className="container footer-inner"><Brand /><div><p>Plan thoughtfully. Stay connected.</p><p className="copyright">© {new Date().getFullYear()} Polymathic Projects</p></div></div></footer>
+    <footer className="site-footer"><div className="container footer-inner"><Brand /><div><nav className="footer-links" aria-label="Privacy and account"><Link to="/privacy">Privacy</Link><Link to="/delete-account">Delete account</Link></nav><p>Plan thoughtfully. Stay connected.</p><p className="copyright">© {new Date().getFullYear()} Polymathic Projects</p></div></div></footer>
   </div>;
 }
 
@@ -41,6 +41,43 @@ function EmailConfirmedPage() {
   return <Layout><section className="confirmation-section"><div className="confirmation-card"><div className={`check ${failed ? "check-error" : ""}`} aria-hidden="true">{failed ? "!" : "✓"}</div><span className="eyebrow">YOUR SAFEWATERS ACCOUNT</span><h1>{failed ? "Let’s try that again." : "Email confirmed."}</h1><p>{failed ? "This confirmation link could not be completed. Return to the SafeWaters app and request a new confirmation email." : "Thanks for confirming your email address. You’re ready to return to SafeWaters and sign in."}</p><a className="button button-primary button-wide" href="safewaters://">Open SafeWaters <span aria-hidden="true">↗</span></a><p className="app-hint">If the app doesn’t open, launch SafeWaters on your phone.</p><Link className="text-link" to="/">← Back to SafeWaters</Link></div><p className="confirmation-caption">A better plan starts here.</p></section></Layout>;
 }
 
+function PrivacyPage() {
+  return <Layout><section className="information-section"><article className="container information-card">
+    <span className="eyebrow">YOUR DATA</span><h1>Privacy</h1>
+    <p className="information-intro">This page explains how personal information is used in SafeWaters, including the app and WaterBuddy.</p>
+    <h2>Information you provide</h2>
+    <p>SafeWaters uses your account and profile details, including your email address, to let you sign in and use the service. Information you add about your club, crew and outings is used to organise activities and keep the people involved informed.</p>
+    <h2>Location and outing records</h2>
+    <p>When you use location features and grant permission, SafeWaters records location information for your outing, including your route and live position. During an active recording session, this can continue in the background so that recording works while your phone is locked or you use another app.</p>
+    <p>You can manage location permissions in your device settings. Disabling permission affects route recording and live location updates.</p>
+    <h2>Sharing through SafeWaters and WaterBuddy</h2>
+    <p>Outing information is shared with the crew and authorised club officials as part of the service. A WaterBuddy link allows people with that link to view information about the outing, including its plan and live progress. Only share outing links with people you want to have access, and remember that recipients can forward them.</p>
+    <h2>Storage and service providers</h2>
+    <p>SafeWaters uses Supabase for account authentication and data storage. The app also stores information on your device, including sign-in information and recorded location points awaiting upload.</p>
+    <h2>Your information and account</h2>
+    <p>To ask about your personal information, request a copy or correction, or discuss its removal and retention, email <a href="mailto:support@safewaters.uk">support@safewaters.uk</a>. Please identify the email address associated with your account so we can locate it and verify your request.</p>
+    <p>To request deletion of your SafeWaters account and associated personal data, follow the instructions on our <Link to="/delete-account">account deletion page</Link>.</p>
+    <h2>Contact</h2>
+    <p>For privacy questions about SafeWaters, contact <a href="mailto:support@safewaters.uk">support@safewaters.uk</a>.</p>
+  </article></section></Layout>;
+}
+
+function DeleteAccountPage() {
+  return <Layout><section className="information-section"><article className="container information-card">
+    <span className="eyebrow">YOUR SAFEWATERS ACCOUNT</span><h1>Delete your account</h1>
+    <p className="information-intro">To request deletion of your SafeWaters account and associated personal data, email our support team.</p>
+    <a className="button button-primary" href="mailto:support@safewaters.uk?subject=SafeWaters%20account%20deletion%20request">Email support to request deletion <span aria-hidden="true">↗</span></a>
+    <p className="email-fallback">You can also write directly to <a href="mailto:support@safewaters.uk">support@safewaters.uk</a> if the button does not open your email app.</p>
+    <h2>What to include</h2>
+    <ul><li>Use the subject “SafeWaters account deletion request”.</li><li>Send your request from the email address registered to your SafeWaters account, where possible. Otherwise, include your registered email address.</li><li>Tell us that you would like your account and associated personal data deleted.</li></ul>
+    <p>Do not send your password or sign-in codes. If you can no longer access your registered email address, let us know so we can help verify account ownership.</p>
+    <h2>What happens next</h2>
+    <p>Support will review your request and may contact you to confirm account ownership before processing it. You can ask about the data covered, any information that needs to be retained, and the expected completion date in your email.</p>
+    <p>Sending an email starts the request; it does not immediately delete your account. Uninstalling the app does not delete your account either.</p>
+    <p>For more information about how SafeWaters uses your data, read our <Link to="/privacy">privacy page</Link>.</p>
+  </article></section></Layout>;
+}
+
 function NotFoundPage() {
   return <Layout><section className="confirmation-section"><div className="confirmation-card"><span className="eyebrow">404 / OFF COURSE</span><h1>Let’s get you back.</h1><p>This page couldn’t be found. Head home to explore SafeWaters.</p><Link className="button button-primary" to="/">Back to home</Link></div></section></Layout>;
 }
@@ -48,9 +85,10 @@ function NotFoundPage() {
 export default function App() {
   const { pathname, hash } = useLocation();
   useEffect(() => {
-    document.title = pathname === "/" ? "SafeWaters | Safer decisions on the water" : pathname === "/email-confirmed" ? "Email confirmation | SafeWaters" : "Page not found | SafeWaters";
+    const titles: Record<string, string> = { "/": "SafeWaters | Safer decisions on the water", "/email-confirmed": "Email confirmation | SafeWaters", "/privacy": "Privacy | SafeWaters", "/delete-account": "Delete your account | SafeWaters" };
+    document.title = titles[pathname.replace(/\/+$/, "") || "/"] ?? "Page not found | SafeWaters";
     if (hash === "#about") document.getElementById("about")?.scrollIntoView();
     else window.scrollTo(0, 0);
   }, [pathname, hash]);
-  return <Routes><Route path="/" element={<HomePage />} /><Route path="/email-confirmed" element={<EmailConfirmedPage />} /><Route path="*" element={<NotFoundPage />} /></Routes>;
+  return <Routes><Route path="/" element={<HomePage />} /><Route path="/email-confirmed" element={<EmailConfirmedPage />} /><Route path="/privacy" element={<PrivacyPage />} /><Route path="/delete-account" element={<DeleteAccountPage />} /><Route path="*" element={<NotFoundPage />} /></Routes>;
 }
