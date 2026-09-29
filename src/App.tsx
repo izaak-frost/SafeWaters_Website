@@ -8,7 +8,7 @@ function Brand() {
 function Layout({ children }: { children: ReactNode }) {
   return <div className="site-shell">
     <a className="skip-link" href="#main">Skip to content</a>
-    <header className="site-header"><div className="container nav"><Brand /><Link className="header-support" to="/support-us">Support SafeWaters <span aria-hidden="true">↗</span></Link></div></header>
+    <header className="site-header"><div className="container nav"><Brand /><Link className="header-support" to="/support-us">Support Us <span aria-hidden="true">↗</span></Link></div></header>
     <main id="main">{children}</main>
     <footer className="site-footer"><div className="container footer-inner"><div><nav className="footer-links" aria-label="SafeWaters links"><Link to="/support-us">Support us</Link><Link to="/privacy">Privacy</Link><Link to="/delete-account">Delete account</Link></nav><p>Plan. Assess. Track.</p><p className="copyright">© {new Date().getFullYear()} Polymathic Projects</p></div></div></footer>
   </div>;
@@ -85,8 +85,14 @@ function SupportUsPage() {
       <h1>Help keep SafeWaters moving forward.</h1>
       <p className="support-intro">SafeWaters is built to help people plan more informed outings and keep those following them better connected.</p>
       <p>If you find SafeWaters useful, you can make a voluntary contribution through Ko-fi. Your support helps with the ongoing costs of developing, running and improving the service.</p>
-      <a className="button support-button" href="https://ko-fi.com/izaakfrost" target="_blank" rel="noreferrer">Support SafeWaters on Ko-fi <span aria-hidden="true">↗</span></a>
-      <p className="support-note">Ko-fi will open in a new tab. Contributions are optional and are not charitable donations.</p>
+      <iframe
+        id="kofiframe"
+        className="kofi-frame"
+        src="https://ko-fi.com/izaakfrost/?hidefeed=true&widget=true&embed=true&preview=true"
+        height="602"
+        title="Support SafeWaters through Ko-fi"
+      />
+      <p className="support-note">Contributions are optional and are not charitable donations.</p>
     </article>
     <aside className="support-impact" aria-label="What your support helps with">
       <span className="eyebrow">WHAT IT SUPPORTS</span>
