@@ -8,9 +8,9 @@ function Brand() {
 function Layout({ children }: { children: ReactNode }) {
   return <div className="site-shell">
     <a className="skip-link" href="#main">Skip to content</a>
-    <header className="site-header"><div className="container nav"><Brand /></div></header>
+    <header className="site-header"><div className="container nav"><Brand /><Link className="header-support" to="/support-us">Support SafeWaters <span aria-hidden="true">↗</span></Link></div></header>
     <main id="main">{children}</main>
-    <footer className="site-footer"><div className="container footer-inner"><Brand /><div><nav className="footer-links" aria-label="Privacy and account"><Link to="/privacy">Privacy</Link><Link to="/delete-account">Delete account</Link></nav><p>Plan thoughtfully. Stay connected.</p><p className="copyright">© {new Date().getFullYear()} Polymathic Projects</p></div></div></footer>
+    <footer className="site-footer"><div className="container footer-inner"><div><nav className="footer-links" aria-label="SafeWaters links"><Link to="/support-us">Support us</Link><Link to="/privacy">Privacy</Link><Link to="/delete-account">Delete account</Link></nav><p>Plan. Assess. Track.</p><p className="copyright">© {new Date().getFullYear()} Polymathic Projects</p></div></div></footer>
   </div>;
 }
 
@@ -78,6 +78,25 @@ function DeleteAccountPage() {
   </article></section></Layout>;
 }
 
+function SupportUsPage() {
+  return <Layout><section className="support-section"><div className="container support-grid">
+    <article className="support-card">
+      <span className="eyebrow">SUPPORT SAFEWATERS</span>
+      <h1>Help keep SafeWaters moving forward.</h1>
+      <p className="support-intro">SafeWaters is built to help people plan more informed outings and keep those following them better connected.</p>
+      <p>If you find SafeWaters useful, you can make a voluntary contribution through Ko-fi. Your support helps with the ongoing costs of developing, running and improving the service.</p>
+      <a className="button support-button" href="https://ko-fi.com/izaakfrost" target="_blank" rel="noreferrer">Support SafeWaters on Ko-fi <span aria-hidden="true">↗</span></a>
+      <p className="support-note">Ko-fi will open in a new tab. Contributions are optional and are not charitable donations.</p>
+    </article>
+    <aside className="support-impact" aria-label="What your support helps with">
+      <span className="eyebrow">WHAT IT SUPPORTS</span>
+      <div className="support-impact-item"><span aria-hidden="true">01</span><div><h2>Keeping it running</h2><p>Hosting, data services and the tools needed to operate SafeWaters.</p></div></div>
+      <div className="support-impact-item"><span aria-hidden="true">02</span><div><h2>Improving the experience</h2><p>Continued development, testing and thoughtful refinements.</p></div></div>
+      <div className="support-impact-item"><span aria-hidden="true">03</span><div><h2>Building for the water</h2><p>More useful planning and safety features for clubs and crews.</p></div></div>
+    </aside>
+  </div></section></Layout>;
+}
+
 function NotFoundPage() {
   return <Layout><section className="confirmation-section"><div className="confirmation-card"><span className="eyebrow">404 / OFF COURSE</span><h1>Let’s get you back.</h1><p>This page couldn’t be found. Head home to explore SafeWaters.</p><Link className="button button-primary" to="/">Back to home</Link></div></section></Layout>;
 }
@@ -85,10 +104,10 @@ function NotFoundPage() {
 export default function App() {
   const { pathname, hash } = useLocation();
   useEffect(() => {
-    const titles: Record<string, string> = { "/": "SafeWaters | Safer decisions on the water", "/email-confirmed": "Email confirmation | SafeWaters", "/privacy": "Privacy | SafeWaters", "/delete-account": "Delete your account | SafeWaters" };
+    const titles: Record<string, string> = { "/": "SafeWaters | Safer decisions on the water", "/email-confirmed": "Email confirmation | SafeWaters", "/privacy": "Privacy | SafeWaters", "/delete-account": "Delete your account | SafeWaters", "/support-us": "Support us | SafeWaters" };
     document.title = titles[pathname.replace(/\/+$/, "") || "/"] ?? "Page not found | SafeWaters";
     if (hash === "#about") document.getElementById("about")?.scrollIntoView();
     else window.scrollTo(0, 0);
   }, [pathname, hash]);
-  return <Routes><Route path="/" element={<HomePage />} /><Route path="/email-confirmed" element={<EmailConfirmedPage />} /><Route path="/privacy" element={<PrivacyPage />} /><Route path="/delete-account" element={<DeleteAccountPage />} /><Route path="*" element={<NotFoundPage />} /></Routes>;
+  return <Routes><Route path="/" element={<HomePage />} /><Route path="/email-confirmed" element={<EmailConfirmedPage />} /><Route path="/privacy" element={<PrivacyPage />} /><Route path="/delete-account" element={<DeleteAccountPage />} /><Route path="/support-us" element={<SupportUsPage />} /><Route path="*" element={<NotFoundPage />} /></Routes>;
 }
