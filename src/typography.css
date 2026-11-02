@@ -81,6 +81,7 @@ h3 { font-size: var(--type-heading); }
 }
 .footer-inner p { font-size: var(--type-small); line-height: 1.5; }
 .footer-inner .copyright { font-size: var(--type-caption); }
+.site-footer .footer-links { font-size: var(--type-caption); font-weight: var(--weight-regular); }
 .check { font-size: 2rem; line-height: 1; }
 .carousel-controls button { font-size: var(--type-subheading); line-height: 1; }
 .screenshot-card h3 { font-size: var(--type-lead); }
