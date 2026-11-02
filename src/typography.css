@@ -1,0 +1,91 @@
+/* One type system for every SafeWaters website page. */
+:root {
+  --font-ui: Aptos, "Segoe UI", Calibri, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --type-caption: .75rem;
+  --type-small: .875rem;
+  --type-body: 1rem;
+  --type-lead: 1.125rem;
+  --type-heading: 1.25rem;
+  --type-subheading: 1.5rem;
+  --type-section: clamp(1.75rem, 3vw, 2rem);
+  --type-page: clamp(2rem, 4vw, 2.5rem);
+  --type-hero: clamp(2.5rem, 6vw, 4rem);
+  --weight-regular: 400;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --leading-body: 1.65;
+  --leading-heading: 1.2;
+  --on-dark-muted: #c5d3e4;
+  font-family: var(--font-ui);
+  font-size: 16px;
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+}
+
+body { font-family: var(--font-ui); font-size: var(--type-body); }
+button, input, select, textarea { font: inherit; }
+strong { font-weight: var(--weight-bold); }
+h1, h2, h3 {
+  color: var(--navy);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-heading);
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+h1 { font-size: var(--type-page); }
+h2 { font-size: var(--type-section); }
+h3 { font-size: var(--type-heading); }
+.hero h1 { font-size: var(--type-hero); line-height: 1.08; letter-spacing: -.035em; }
+.support-card h1, .information-card h1, .confirmation-card h1 { font-size: var(--type-page); }
+.feature h3, .information-card h2 { font-size: var(--type-subheading); }
+.screenshot-card h3, .data-type h3, .support-impact-item h2 { font-size: var(--type-heading); }
+
+.hero-copy, .support-card .support-intro, .information-card .information-intro {
+  font-size: var(--type-lead);
+  color: var(--muted);
+}
+.section-heading > p, .feature p, .buddy-intro p, .screenshot-card p,
+.support-card > p, .support-impact-item p, .information-card p,
+.information-card li, .data-type dd {
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
+  color: var(--muted);
+}
+.feature .feature-intro { font-weight: var(--weight-semibold); color: var(--navy); }
+.buddy-intro .buddy-browser-note { font-size: var(--type-body); color: var(--navy); }
+.information-callout strong { font-size: var(--type-body); }
+
+.eyebrow, .feature-tags li, .data-type dt, .support-impact-item > span {
+  font-size: var(--type-caption);
+  font-weight: var(--weight-semibold);
+}
+.eyebrow { letter-spacing: .1em; color: var(--muted); }
+.feature-tags li { line-height: 1.4; }
+.hero-note, .buddy-screenshot figcaption, .carousel-toolbar p,
+.information-sidebar > p, .information-card .policy-date,
+.information-card .information-footnote, .information-card .email-fallback,
+.support-card .support-note, .confirmation-card .app-hint,
+.confirmation-caption, .text-link {
+  font-size: var(--type-small);
+  line-height: var(--leading-body);
+  color: var(--muted);
+}
+.buddy-screenshot figcaption, .carousel-toolbar p { font-weight: var(--weight-semibold); }
+
+.brand { font-size: var(--type-subheading); font-weight: var(--weight-bold); letter-spacing: -.02em; line-height: 1.2; }
+.brand small { font-size: var(--type-caption); font-weight: var(--weight-regular); letter-spacing: 0; line-height: 1.5; }
+.button, .header-support, .header-data, .information-nav a, .footer-links {
+  font-size: var(--type-small);
+  font-weight: var(--weight-semibold);
+  line-height: 1.5;
+}
+.footer-inner p { font-size: var(--type-small); line-height: 1.5; }
+.footer-inner .copyright { font-size: var(--type-caption); }
+.check { font-size: 2rem; line-height: 1; }
+.carousel-controls button { font-size: var(--type-subheading); line-height: 1; }
+.screenshot-card h3 { font-size: var(--type-lead); }
+.screenshot-card p { font-size: var(--type-small); line-height: 1.6; }
+
+@media (max-width: 720px) {
+  .information-nav a { font-size: var(--type-caption); }
+}

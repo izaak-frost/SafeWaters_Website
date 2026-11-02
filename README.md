@@ -7,7 +7,9 @@ React + TypeScript + Vite public website for safewaters.uk.
 - `npm run build` checks TypeScript and produces `dist`.
 - `npm run preview` serves the production build locally.
 
-Routes: `/`, `/email-confirmed`, and a fallback page for unknown URLs.
+Routes: `/`, `/email-confirmed`, `/support-us`, `/data-safety`, `/privacy`, `/delete-account`, and a fallback page for unknown URLs.
+
+The privacy, data safety and deletion pages share content and layout in `src/DataPrivacy.tsx`. Keep these descriptions aligned with the app, service-provider configuration and the separately maintained Google Play declarations. Account-deletion requests use email; this website does not automatically delete accounts or submit the Play Console Data safety form. Support aims to handle verified requests as soon as possible. No fixed deletion deadline or backup-retention period has been established; do not add one without confirming the operational process.
 Cloudflare Pages: use `npm run build` as the build command and `dist` as the output directory. Pages supplies SPA fallback automatically when there is no top-level `404.html`.
 
 Cloudflare Workers Static Assets: use `npm run build`, then `npx wrangler deploy --config wrangler.jsonc`. The checked-in configuration enables `assets.not_found_handling: "single-page-application"` so direct links such as `/email-confirmed` load the React app.
