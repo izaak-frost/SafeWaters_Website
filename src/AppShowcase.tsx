@@ -3,11 +3,11 @@ import { useCarousel } from "./useCarousel";
 
 const appScreens = [
   { image: "risk-dashboard", title: "Risk dashboard", description: "See the day’s risk forecast and the conditions contributing to it." },
+  { image: "risk-assessment", title: "Outing risk assessment", description: "Understand an outing’s risk score and the factors behind it." },
   { image: "forecast", title: "Weather forecast", description: "Explore hourly weather and marine forecasts before heading out." },
   { image: "tide-table", title: "Tide table", description: "Check tide times, predicted heights and the shape of the day’s tide." },
   { image: "activities", title: "Your activities", description: "Keep your planned, completed and cancelled outings in one place." },
   { image: "club-management", title: "Club management", description: "Manage your club’s members, saved locations and equipment." },
-  { image: "risk-assessment", title: "Outing risk assessment", description: "Understand an outing’s risk score and the factors behind it." },
 ];
 
 export default function AppShowcase() {
