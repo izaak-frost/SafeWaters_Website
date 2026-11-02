@@ -22,9 +22,9 @@
 .hero-preview-label { display: block; color: white; font-size: var(--type-small); font-weight: var(--weight-semibold); margin-bottom: 12px; }
 .hero-preview-frame { position: relative; overflow: hidden; border-radius: 14px; box-shadow: 12px 18px 0 #00183c; isolation: isolate; transform: translateZ(0); }
 .hero-preview-frame::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(197, 211, 228, .55); border-radius: inherit; pointer-events: none; }
-.hero-preview-frame .hero-risk-screen, .hero-preview-frame .buddy-screenshot svg { display: block; width: 100%; height: auto; max-width: 100%; aspect-ratio: auto; border: 0; border-radius: 0; box-shadow: none; }
+.hero-preview-frame .hero-risk-screen, .hero-preview-frame .buddy-screenshot>img { display: block; width: 100%; height: auto; max-width: 100%; aspect-ratio: auto; border: 0; border-radius: 0; box-shadow: none; }
 .hero-preview-frame .buddy-screenshot { width: 100%; margin: 0; }
-.hero-buddy-preview .hero-preview-frame, .hero-buddy-preview .buddy-screenshot svg { background: #002152; }
+.hero-buddy-preview .hero-preview-frame, .hero-buddy-preview .buddy-screenshot>img { background: #002152; }
 @media (max-width: 960px) {
   .hero .hero-grid { gap: 32px; }
   .hero h1 { font-size: clamp(2.25rem, 4.5vw, 3.5rem); }

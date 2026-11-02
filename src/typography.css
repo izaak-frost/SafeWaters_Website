@@ -84,8 +84,8 @@ h3 { font-size: var(--type-heading); }
 .site-footer .footer-links { font-size: var(--type-caption); font-weight: var(--weight-regular); }
 .check { font-size: 2rem; line-height: 1; }
 .carousel-controls button { font-size: var(--type-subheading); line-height: 1; }
-.screenshot-card h3 { font-size: var(--type-lead); }
-.screenshot-card p { font-size: var(--type-small); line-height: 1.6; }
+.screenshot-caption h3 { font-size: var(--type-lead); }
+.screenshot-caption p { font-size: var(--type-small); line-height: 1.6; }
 
 @media (max-width: 720px) {
   .information-nav a { font-size: var(--type-caption); }

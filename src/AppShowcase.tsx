@@ -2,12 +2,12 @@ import { useState } from "react";
 import { useCarousel } from "./useCarousel";
 
 const appScreens = [
-  { image: "risk-dashboard", title: "Risk dashboard", description: "See the day’s risk forecast and the conditions contributing to it." },
-  { image: "risk-assessment", title: "Outing risk assessment", description: "Understand an outing’s risk score and the factors behind it." },
-  { image: "forecast", title: "Weather forecast", description: "Explore hourly weather and marine forecasts before heading out." },
-  { image: "tide-table", title: "Tide table", description: "Check tide times, predicted heights and the shape of the day’s tide." },
-  { image: "activities", title: "Your activities", description: "Keep your planned, completed and cancelled outings in one place." },
-  { image: "club-management", title: "Club management", description: "Manage your club’s members, saved locations and equipment." },
+  { image: "risk-dashboard", title: "Risk Dashboard", description: "See the day’s risk forecast and the conditions contributing to it." },
+  { image: "risk-assessment", title: "Outing Risk Assessment", description: "Understand an outing’s risk score and the factors behind it." },
+  { image: "forecast", title: "Weather Forecast", description: "Explore hourly weather and marine forecasts before heading out." },
+  { image: "tide-table", title: "Tide Table", description: "Check tide times, predicted heights and the shape of the day’s tide." },
+  { image: "activities", title: "Your Activities", description: "Keep your planned, completed and cancelled outings in one place." },
+  { image: "club-management", title: "Club Management", description: "Manage your club’s members, saved locations and equipment." },
 ];
 
 export default function AppShowcase() {
@@ -30,8 +30,8 @@ export default function AppShowcase() {
           scroll(event.key === "ArrowLeft" ? -1 : 1);
         }
       }}>{appScreens.map((screen, index) => <figure className="screenshot-card" key={screen.image} role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${appScreens.length}: ${screen.title}`}>
-        <div className="app-screen"><img src={`/screenshots/${screen.image}${theme === "light" ? "-light.png" : ".jpg"}`} alt={`SafeWaters ${screen.title.toLowerCase()} screen in ${theme} mode`} width="588" height="1280" loading={index < 3 ? "eager" : "lazy"} decoding="async" /></div>
-        <figcaption><h3>{screen.title}</h3><p>{screen.description}</p></figcaption>
+        <div className="app-screen"><img src={`/screenshots/${screen.image}${theme === "light" ? "-light" : ""}${["activities", "club-management"].includes(screen.image) ? ".jpg" : "-website.png"}`} alt={`SafeWaters ${screen.title.toLowerCase()} screen in ${theme} mode`} width="588" height="1280" loading={index < 3 ? "eager" : "lazy"} decoding="async" /></div>
+        <figcaption className="screenshot-caption"><h3>{screen.title}</h3><p>{screen.description}</p></figcaption>
       </figure>)}</div>
         <div className="carousel-controls carousel-bottom-controls">
           <button type="button" aria-label="Previous app screenshot" aria-controls="app-screenshots" disabled={!canScroll.previous} onClick={() => scroll(-1)}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></button>
