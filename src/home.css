@@ -5,17 +5,23 @@
 .hero h1 { color: white; font-size: clamp(2.5rem, 4.5vw, 4.25rem); line-height: 1.08; letter-spacing: -.035em; margin-bottom: 28px; text-wrap: initial; }
 .hero h1 span { color: #42b7fb; }
 .hero-copy { color: #e0eaf2; max-width: 440px; margin: 0; font-size: var(--type-lead); }
-.hero-actions { display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 12px; margin-top: 32px; }
-.hero-primary { background: #42b7fb; color: var(--navy); border-radius: 8px; padding: 15px 20px; }
-.hero-primary:hover:not(:disabled) { background: #8ad4ff; }
-.hero-download { position: relative; overflow: hidden; border: 1px solid #42b7fb; min-width: 220px; padding: 12px 20px 32px; justify-content: center; text-align: center; opacity: 1; }
-.download-coming-soon { position: absolute; z-index: 1; bottom: 0; left: 0; width: 100%; height: 20px; display: grid; place-items: center; border-top: 1px solid #547394; background: #123563; color: white; font-size: 11px; font-weight: var(--weight-semibold); line-height: 1; letter-spacing: .04em; pointer-events: none; }
-.hero-download svg { position: absolute; top: calc(50% - 10px); right: 16px; width: 18px; height: 18px; transform: translateY(-50%); }
-.hero-features { position: relative; color: white; border: 1px solid #547394; min-width: 220px; justify-content: center; text-align: center; padding: 15px 20px; }
-.hero-features span { position: absolute; right: 16px; }
-.hero-actions .button { flex: 1; min-width: 0; height: 72px; padding-inline: 24px; white-space: nowrap; }
-.hero-actions .hero-download svg, .hero-actions .hero-features span { right: 9px; }
+.testing-notice { margin-top: 16px; padding: 14px 16px; border: 1px solid #edc76b; border-radius: 8px; background: #fff4d6; color: #513b08; }
+.testing-notice strong { display: block; font-weight: var(--weight-bold); }
+.testing-notice p { margin: 6px 0 0; font-size: var(--type-small); line-height: 1.55; }
+.hero-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 440px; margin-top: 24px; }
+.hero-primary { background: #42b7fb; color: var(--navy); border-radius: 8px; }
+.hero-primary:hover { background: #8ad4ff; }
+.hero-download { min-width: 0; min-height: 60px; padding: 10px 12px; gap: 20px; text-align: center; }
+.download-platform-icon { width: 32px; height: 34px; flex-shrink: 0; }
+.android-icon-eyes { fill: #42b7fb; }
+.hero-download:hover .android-icon-eyes { fill: #8ad4ff; }
+.hero-download > span { text-align: left; }
+.hero-download small { display: block; margin-top: 2px; font-size: var(--type-caption); font-weight: var(--weight-regular); }
+.hero-features { width: 100%; margin-top: 16px; color: white; border: 1px solid #547394; text-align: center; padding: 12px 20px; }
 .hero-features:hover { background: #123563; }
+.hero-product { min-width: 0; }
+.hero-testing { max-width: 480px; margin-inline: auto; }
+.hero-testing .hero-actions { max-width: none; gap: 8px; }
 .hero-product-preview { display: grid; grid-template-columns: minmax(0, .500557fr) minmax(0, .6fr); gap: 18px; align-items: start; min-width: 0; padding: 20px 8px; }
 .hero-app-preview { transform: rotate(-3deg) translateZ(0); backface-visibility: hidden; }
 .hero-buddy-preview { transform: rotate(3deg) translateZ(0); backface-visibility: hidden; }
@@ -38,9 +44,16 @@
   .hero-product-preview { max-width: 480px; width: 100%; margin-inline: auto; gap: 14px; padding: 12px 10px 20px; }
   .hero-preview-frame { box-shadow: 6px 10px 0 #00183c; }
 }
-@media (max-width: 380px) {
+@media (max-width: 480px) {
   .hero-actions { gap: 8px; }
-  .hero-actions .button { font-size: var(--type-caption); padding-inline: 20px; }
-  .hero-actions .hero-download svg { width: 14px; height: 14px; }
-  .hero-actions .hero-download svg, .hero-actions .hero-features span { right: 6px; }
+  .hero-download { padding: 10px 8px; gap: 12px; font-size: var(--type-caption); }
+  .download-platform-icon { width: 28px; height: 30px; }
+  .hero-download small { font-size: 11px; }
 }
+
+.hero-actions-native { grid-template-columns: minmax(0, 1fr) 72px; align-items: center; }
+.hero-actions-native .hero-download:not(.hero-download-alternative) { min-height: 72px; font-size: var(--type-body); }
+.hero-actions-native .hero-download:not(.hero-download-alternative) small { font-size: var(--type-caption); }
+.hero-actions-native .hero-download:not(.hero-download-alternative) .download-platform-icon { width: 32px; height: 34px; }
+.hero-download-alternative { width: 72px; height: 72px; min-height: 72px; aspect-ratio: 1; padding: 10px; }
+.hero-download-alternative .download-platform-icon { width: 26px; height: 28px; }

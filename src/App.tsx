@@ -1,9 +1,10 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { DataSafetyPage, DeleteAccountPage, PrivacyPage } from "./DataPrivacy";
 import WaterBuddyShowcase, { WaterBuddyMapPreview } from "./WaterBuddyShowcase";
 import RiskDashboardPreview from "./RiskDashboardPreview";
 import AppShowcase from "./AppShowcase";
+import { detectDownloadPlatform } from "./downloadPlatform";
 
 function Brand() {
   return <Link className="brand" to="/" aria-label="SafeWaters home"><img src="/logo.png" alt="" width="64" height="64" /><span>Safe<span className="brand-water">Waters</span></span></Link>;
@@ -32,9 +33,48 @@ function OutingFeatures() {
   </article>)}</div>;
 }
 
+const downloadPlatforms = [
+  { id: "ios", label: "Test on iOS", detail: "Join via TestFlight", href: "https://testflight.apple.com/join/gx2GKMdv", icon: <svg className="download-platform-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M17.05 12.54c.03 3.23 2.83 4.3 2.86 4.31-.02.08-.45 1.53-1.48 3.03-.89 1.3-1.81 2.59-3.27 2.62-1.43.03-1.89-.85-3.53-.85-1.63 0-2.14.82-3.5.88-1.41.05-2.47-1.4-3.37-2.69-1.84-2.65-3.24-7.49-1.35-10.76a5.23 5.23 0 0 1 4.44-2.69c1.39-.03 2.7.94 3.53.94.82 0 2.37-1.16 3.99-.99.68.03 2.6.27 3.83 2.07-.1.06-2.29 1.33-2.26 4.13ZM14.36 4.58c.75-.91 1.26-2.18 1.12-3.44-1.08.04-2.39.72-3.17 1.63-.7.81-1.32 2.1-1.15 3.34 1.2.09 2.43-.61 3.2-1.53Z" /></svg> },
+  { id: "android", label: "Test on Android", detail: "Get it on Google Play", href: "https://play.google.com/store/apps/details?id=com.polymathicprojects.safewaters", icon: <svg className="download-platform-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7.2 3.1 5.9 1.2a.5.5 0 0 0-.8.6l1.3 1.9A6.4 6.4 0 0 0 5 7.5h14a6.4 6.4 0 0 0-1.4-3.8l1.3-1.9a.5.5 0 1 0-.8-.6l-1.3 1.9A7.9 7.9 0 0 0 12 1.8a7.9 7.9 0 0 0-4.8 1.3ZM5 8.5h14V17a1 1 0 0 1-1 1h-1v3a1.5 1.5 0 0 1-3 0v-3h-4v3a1.5 1.5 0 0 1-3 0v-3H6a1 1 0 0 1-1-1ZM2.5 8.5A1.5 1.5 0 0 1 4 10v6a1.5 1.5 0 0 1-3 0v-6a1.5 1.5 0 0 1 1.5-1.5Zm19 0A1.5 1.5 0 0 1 23 10v6a1.5 1.5 0 0 1-3 0v-6a1.5 1.5 0 0 1 1.5-1.5Z" /><g className="android-icon-eyes"><circle cx="8.5" cy="5" r=".7" /><circle cx="15.5" cy="5" r=".7" /></g></svg> },
+] as const;
+
+function DownloadActions() {
+  const [nativePlatform] = useState(() => typeof navigator === "undefined" ? null : detectDownloadPlatform(navigator));
+  const platforms = nativePlatform === "android" ? [downloadPlatforms[1], downloadPlatforms[0]] : downloadPlatforms;
+
+  return <div className={`hero-actions${nativePlatform ? " hero-actions-native" : ""}`} aria-describedby="app-testing-notice">
+    {platforms.map(platform => {
+      const isAlternative = nativePlatform !== null && platform.id !== nativePlatform;
+      return <a key={platform.id} className={`button hero-primary hero-download${isAlternative ? " hero-download-alternative" : ""}`} href={platform.href} aria-label={`${platform.label} — ${platform.detail}`} title={isAlternative ? `${platform.label} — ${platform.detail}` : undefined}>
+        {platform.icon}
+        {!isAlternative && <span>{platform.label}<small>{platform.detail}</small></span>}
+      </a>;
+    })}
+  </div>;
+}
+
 function HomePage() {
   return <Layout>
-    <section className="hero"><div className="container hero-grid"><div className="hero-content"><span className="eyebrow">PLAN · ASSESS · TRACK</span><h1>Session planning<br /><span>&amp; live tracking.</span></h1><p className="hero-copy">Plan your session, check weather and tidal conditions, and share your live progress with WaterBuddy.</p><br /><p className="hero-copy">Download SafeWaters today and plan your next adventure with confidence.</p><div className="hero-actions"><button type="button" className="button hero-primary hero-download" disabled>Download App <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5" /></svg><span className="download-coming-soon">Coming Soon</span></button><a className="button hero-features" href="#app-showcase-title" onClick={event => { event.preventDefault(); document.getElementById("app-showcase-title")?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); }}>Explore the Features</a></div></div><div className="hero-product-preview"><div className="hero-app-preview"><span className="hero-preview-label">SafeWaters App</span><div className="hero-preview-frame"><RiskDashboardPreview /></div></div><div className="hero-buddy-preview"><span className="hero-preview-label">WaterBuddy · Web</span><div className="hero-preview-frame"><WaterBuddyMapPreview /></div></div></div></div></section>
+    <section className="hero">
+      <div className="container hero-grid">
+        <div className="hero-content">
+          <span className="eyebrow">PLAN · ASSESS · TRACK</span>
+          <h1>Session planning<br /><span>&amp; live tracking.</span></h1>
+          <p className="hero-copy">Plan your session, check weather and tidal conditions, and share your live progress with WaterBuddy.</p>
+        </div>
+        <div className="hero-product">
+          <div className="hero-product-preview"><div className="hero-app-preview"><span className="hero-preview-label">SafeWaters App</span><div className="hero-preview-frame"><RiskDashboardPreview /></div></div><div className="hero-buddy-preview"><span className="hero-preview-label">WaterBuddy · Web</span><div className="hero-preview-frame"><WaterBuddyMapPreview /></div></div></div>
+          <div className="hero-testing">
+            <DownloadActions />
+            <div className="testing-notice" id="app-testing-notice">
+              <strong>Help shape SafeWaters</strong>
+              <p>Join our early testers and help improve the app with your feedback. This is a test version, so you may encounter bugs.</p>
+            </div>
+            <a className="button hero-features" href="#app-showcase-title" onClick={event => { event.preventDefault(); document.getElementById("app-showcase-title")?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); }}>Explore the Features</a>
+          </div>
+        </div>
+      </div>
+    </section>
     <section className="section" id="about"><div className="container"><div className="section-heading"><div><h2>Plan, assess and track your outings.</h2></div></div><OutingFeatures /></div></section>
     <AppShowcase />
     <section className="buddy-section" id="waterbuddy"><div className="container"><div className="section-heading buddy-heading"><h2>WaterBuddy</h2><div className="buddy-intro"><p>Keep friends, family and club members connected to your outing with WaterBuddy. Share a link to let them follow your route, view outing details and track your progress in real time. <strong>No app required</strong> – simply open the shared link in any web browser.</p></div></div><WaterBuddyShowcase /></div></section>
