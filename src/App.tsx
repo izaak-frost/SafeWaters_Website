@@ -7,7 +7,7 @@ import AppShowcase from "./AppShowcase";
 import { detectDownloadPlatform } from "./downloadPlatform";
 
 function Brand() {
-  return <Link className="brand" to="/" aria-label="SafeWaters home"><img src="/logo.png?v=2be2771c4ff6" alt="" width="64" height="64" /><span>Safe<span className="brand-water">Waters</span></span></Link>;
+  return <Link className="brand" to="/" aria-label="SafeWaters home"><img src="/logo.png?v=be199aa1e97b" alt="" width="64" height="64" /><span>Safe<span className="brand-water">Waters</span></span></Link>;
 }
 
 function Layout({ children }: { children: ReactNode }) {
