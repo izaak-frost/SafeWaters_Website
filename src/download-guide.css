@@ -1,0 +1,116 @@
+.container.guide-container {
+  width: min(780px, calc(100% - 40px));
+}
+
+.guide-hero {
+  padding: 32px 0 clamp(40px, 8vw, 72px);
+  background: var(--navy);
+  color: #fff;
+}
+
+.guide-home, .guide-switch {
+  color: var(--on-dark-muted);
+  font-size: var(--type-small);
+}
+
+.guide-eyebrow {
+  margin: 28px 0 8px;
+  color: #8ad4ff;
+  font-size: var(--type-caption);
+  font-weight: var(--weight-bold);
+  letter-spacing: .12em;
+}
+
+.guide-hero h1 {
+  margin-bottom: 12px;
+  color: #fff;
+  text-wrap: pretty;
+}
+
+.guide-lead {
+  max-width: 55ch;
+  color: var(--on-dark-muted);
+  font-size: var(--type-lead);
+}
+
+.button.guide-download {
+  min-height: 52px;
+  gap: 10px;
+  background: #fff;
+  color: var(--navy);
+  font-weight: var(--weight-bold);
+}
+
+.guide-download:hover { background: #e5f4ff; }
+.guide-download .download-platform-icon { width: 24px; height: 26px; }
+.guide-switch { margin: 12px 0 0; }
+.guide-body { padding-block: 24px 64px; }
+
+.guide-jumps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--type-small);
+}
+
+.guide-section { margin-top: 36px; }
+.guide-section h2 { margin-bottom: 12px; scroll-margin-top: 16px; }
+.guide-section-intro, .guide-steps p, .guide-help p { color: var(--muted); }
+
+.guide-steps {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: guide-step;
+}
+
+.guide-steps li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  padding: clamp(14px, 3vw, 22px);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  counter-increment: guide-step;
+}
+
+.guide-steps li::before {
+  content: counter(guide-step);
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #e7f3fa;
+  color: var(--navy);
+  font-weight: var(--weight-bold);
+}
+
+.guide-steps h3, .guide-steps p { margin: 0; }
+.guide-steps p a { color: var(--navy); font-weight: var(--weight-semibold); }
+
+.guide-screenshots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 125px), 180px));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.guide-screenshots figure { min-width: 0; margin: 0; }
+.guide-screenshots a, .guide-screenshots img { display: block; border-radius: 12px; }
+.guide-screenshots img { width: 100%; height: auto; }
+.guide-screenshots figcaption { margin-top: 6px; color: var(--muted); font-size: var(--type-small); }
+
+@media (max-width: 540px) {
+  .guide-screenshots { grid-template-columns: repeat(auto-fit, minmax(min(100%, 110px), 1fr)); }
+  .guide-screenshots figure { max-width: 180px; }
+}
+
+.guide-reference { margin: 12px 0 0; font-size: var(--type-small); }
+.guide-note { margin: 16px 0 0; padding: 14px 18px; border-left: 3px solid var(--blue); background: #e7f3fa; }
+.guide-help { padding-top: 24px; border-top: 1px solid var(--border); }

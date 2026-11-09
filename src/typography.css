@@ -72,7 +72,7 @@ h3 { font-size: var(--type-heading); }
 }
 .buddy-screenshot figcaption, .carousel-toolbar p { font-weight: var(--weight-semibold); }
 
-.brand { font-size: var(--type-subheading); font-weight: var(--weight-bold); letter-spacing: -.02em; line-height: 1.2; }
+.brand { font-size: clamp(1.625rem, 4vw, 2rem); font-weight: var(--weight-bold); letter-spacing: -.02em; line-height: 1.2; }
 .brand small { font-size: var(--type-caption); font-weight: var(--weight-regular); letter-spacing: 0; line-height: 1.5; }
 .button, .header-support, .header-data, .information-nav a, .footer-links {
   font-size: var(--type-small);
